@@ -89,21 +89,6 @@ Copiar código
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
-cd seu-repo
-(Opção simples) Abra login.html no navegador (file://) ou rode um servidor local (recomendado):
-
-bash
-Copiar código
-# Python 3
-python -m http.server 8080
-# então abra http://localhost:8080/login.html
-ou
-
-bash
-Copiar código
-# usando npm (serve)
-npx serve .
 Faça login (qualquer e-mail é aceito no protótipo), você será redirecionado para index.html.
 
 Teste funcionalidades: publicar projeto, chat, editar perfil, gerar dados demo, etc.
