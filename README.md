@@ -206,20 +206,4 @@ Para dúvidas ou colaborações, abra uma issue no GitHub ou envie e-mail (adici
 Leia também (documentação completa / relatório):
 https://docs.google.com/document/d/1Ul2-VwThaYYE9tjy2y2tReZ1-lEKP0YBBz-jgP4Zbus/edit?usp=sharing
 
-yaml
-Copiar código
-
----
-
-Quer que eu também:
-- gere uma versão `README_pt-br.md` com linguagem mais acadêmica?  
-- adicione badges dinâmicos (build, coverage) prontos para configurar?  
-- crie um `CONTRIBUTING.md` e `LICENSE` (MIT) prontos para copiar?  
-
-Qualquer opção, eu já preparo e te mando para colar no repositório.
-::contentReference[oaicite:0]{index=0}
-
-
-
-
 
