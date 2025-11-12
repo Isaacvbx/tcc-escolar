@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Projetos — SciShare</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<div class="container-fluid">
+<a class="navbar-brand" href="index.html">SciShare</a>
+<div class="ms-auto">
+<a class="btn btn-sm btn-outline-primary me-2" href="projects.html">Projetos</a>
+<a class="btn btn-sm btn-outline-primary me-2" href="chat.html">Chat</a>
+<a class="btn btn-sm btn-outline-primary me-2" href="profile.html">Perfil</a>
+<a class="btn btn-sm btn-outline-primary" href="cases.html">Casos</a>
+</div>
+</div>
+</nav>
+
+
+<main class="container my-4">
+<div class="card p-3 shadow-sm">
+<div class="d-flex justify-content-between align-items-center mb-3">
+<h5>Projetos Abertos</h5>
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#publishModal">Publicar Projeto</button>
+</div>
+
+
+<div id="projectsList" class="row gy-3"></div>
+</div>
+</main>
+
+
+<!-- modal publish (copiado do anterior) -->
+<div class="modal fade" id="publishModal" tabindex="-1" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title">Publicar Projeto Aberto</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body">
+<form id="projectForm">
+<div class="mb-3"><label class="form-label">Título</label><input id="projTitle" class="form-control" required></div>
+<div class="mb-3"><label class="form-label">Resumo</label><textarea id="projSummary" class="form-control" rows="3"></textarea></div>
+<div class="mb-3"><label class="form-label">Áreas (vírgula)</label><input id="projAreas" class="form-control"></div>
+<div class="mb-3"><label class="form-label">Convidar colaboradores (e-mails)</label><input id="projCollabs" class="form-control"></div>
+</form>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+<button id="publishBtn" type="button" class="btn btn-primary">Publicar</button>
+</div>
+</div>
+</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="common.js"></script>
+<script src="projects.js"></script>
+</body>
+</html>

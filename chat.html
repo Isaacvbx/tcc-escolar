@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chat — SciShare</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<div class="container-fluid">
+<a class="navbar-brand" href="index.html">SciShare</a>
+<div class="ms-auto">
+<a class="btn btn-sm btn-outline-primary me-2" href="projects.html">Projetos</a>
+<a class="btn btn-sm btn-outline-primary me-2" href="chat.html">Chat</a>
+<a class="btn btn-sm btn-outline-primary me-2" href="profile.html">Perfil</a>
+<a class="btn btn-sm btn-outline-primary" href="cases.html">Casos</a>
+</div>
+</div>
+</nav>
+
+
+<main class="container my-4">
+<div class="card p-3 shadow-sm">
+<h5>Chat (estilo bolha)</h5>
+<div id="chatWindow" class="chat-window mb-3"></div>
+<div class="d-flex gap-2">
+<button id="emojiBtn" class="btn btn-light">😊</button>
+<input id="chatInput" class="form-control" placeholder="Mensagem">
+<button id="sendChatBtn" class="btn btn-primary">Enviar</button>
+</div>
+</div>
+</main>
+
+
+<script src="common.js"></script>
+<script src="chat.js"></script>
+</body>
+</html>

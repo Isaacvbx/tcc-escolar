@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SciShare — Painel</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind utilities (opcional) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAV: ids obrigatórios navUserName e logoutBtn -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13 7c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zM6 8c0 1.105-.672 2-1.5 2S3 9.105 3 8s.672-2 1.5-2S6 6.895 6 8zM2 13s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H2z"/>
+        </svg>
+        <strong>SciShare</strong>
+      </a>
+
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <a class="btn btn-sm btn-outline-primary me-1" href="projects.html">Projetos</a>
+        <a class="btn btn-sm btn-outline-primary me-1" href="chat.html">Chat</a>
+        <a class="btn btn-sm btn-outline-primary me-1" href="profile.html">Perfil</a>
+        <a class="btn btn-sm btn-outline-primary me-2" href="cases.html">Casos</a>
+
+        <span id="navUserName" class="text-muted small me-2"></span>
+        <button id="logoutBtn" class="btn btn-outline-danger btn-sm">Sair</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-4">
+    <div class="row g-4">
+      <!-- Conteúdo principal / Projetos + Chat -->
+      <section class="col-12 col-lg-7">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="card-title mb-0">Projetos Abertos</h5>
+              <small id="projectsCount" class="text-muted">0 projetos</small>
+            </div>
+
+            <div id="projectsList" class="row gy-3">
+              <!-- projetos renderizados pelo script.js -->
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-4 shadow-sm">
+          <div class="card-body pb-2">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">Chat (estilo bolha)</h5>
+              <small id="chatStatus" class="text-muted small">offline</small>
+            </div>
+
+            <div id="chatWindow" class="chat-window border rounded p-3 mb-2" style="height:260px; overflow:auto; background:#f8fafc;"></div>
+
+            <div class="d-flex gap-2 align-items-center">
+              <button id="emojiBtn" class="btn btn-light btn-sm">😊</button>
+              <input id="chatInput" class="form-control" placeholder="Escreva uma mensagem..." aria-label="Mensagem">
+              <button id="sendChatBtn" class="btn btn-primary btn-sm">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Painel lateral -->
+      <aside class="col-12 col-lg-5">
+        <div class="card shadow-sm mb-3">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">Painel de Controle</h6>
+            <div class="mb-3">
+              <canvas id="projectsChart" height="140"></canvas>
+            </div>
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-secondary" id="fakeDataBtn">Gerar dados demo</button>
+              <button class="btn btn-outline-danger" id="clearDataBtn">Limpar dados locais</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shadow-sm mb-3">
+          <div class="card-body">
+            <h6>Perfil Rápido</h6>
+            <p class="mb-1"><strong id="profileName">—</strong></p>
+            <p class="text-muted mb-1" id="profileAreas">Áreas: —</p>
+            <button class="btn btn-sm btn-outline-primary" id="editProfileBtn">Editar Perfil</button>
+          </div>
+        </div>
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h6>Casos recentes / pesquisas</h6>
+            <ul id="recentCases" class="list-unstyled small text-muted mb-0">
+              <!-- preenchido por script.js -->
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Modal: Publicar Projeto -->
+  <div class="modal fade" id="publishModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title">Publicar Projeto Aberto</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <form id="projectForm">
+            <div class="mb-3"><label class="form-label">Título</label><input id="projTitle" class="form-control" required></div>
+            <div class="mb-3"><label class="form-label">Resumo</label><textarea id="projSummary" class="form-control" rows="3"></textarea></div>
+            <div class="mb-3"><label class="form-label">Áreas de interesse (vírgula)</label><input id="projAreas" class="form-control"></div>
+            <div class="mb-3"><label class="form-label">Convidar colaboradores (e-mails, vírgula)</label><input id="projCollabs" class="form-control" placeholder="ex: maria@uni.edu, joao@lab.org"></div>
+          </form>
+        </div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button><button id="publishBtn" type="button" class="btn btn-primary">Publicar</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Editar Perfil -->
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title">Meu Perfil</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <form id="profileForm">
+            <div class="mb-3"><label class="form-label">Nome</label><input id="profileNameInput" class="form-control"></div>
+            <div class="mb-3"><label class="form-label">Áreas de interesse (vírgula)</label><input id="profileAreasInput" class="form-control"></div>
+            <div class="mb-3"><label class="form-label">Bio</label><textarea id="profileBioInput" class="form-control" rows="3"></textarea></div>
+          </form>
+        </div>
+        <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button><button id="saveProfileBtn" type="button" class="btn btn-primary">Salvar</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- libs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- IMPORTANT: common.js MUST be loaded before script.js -->
+  <script src="common.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
